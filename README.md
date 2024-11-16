@@ -5,33 +5,41 @@ uCompression provides RLE compression and decompression functions for microcontr
 ## Compressing data
 
 ```javascript
-uint16_t uCompression::RLEcompress( const uint8_t *uncompressedData, uint8_t *compressedData, uint16_t chunkSize );
+uint16_t uCompression::RLEcompress( const uint8_t* uncompressedData,
+                                    uint8_t*       compressedData,
+                                    uint16_t       chunkSize );
 ```
-or
+or when compressing data already stored in the program memory:
 
 ```javascript
-uint16_t uCompression::pgm_RLEcompress( const uint8_t *uncompressedData, uint8_t *compressedData, uint16_t chunkSize );
+uint16_t uCompression::pgm_RLEcompress( const uint8_t* uncompressedData,
+                                        uint8_t*       compressedData,
+                                        uint16_t       chunkSize );
 ```
-if you need to compress data stored in the program memory (e.g. on AVR systems).
-
 
 ## Uncompressing data
 If the compressed data is stored in RAM, it can be uncompressed by
 
 ```javascript
-const uint8_t *uCompression::RLEdecompress( const uint8_t *compressedData, uint8_t *uncompressedData, uint16_t chunkSize );
+const uint8_t* uCompression::RLEdecompress( const uint8_t* compressedData,
+                                            uint8_t*       uncompressedData,
+                                            uint16_t       chunkSize );
 ```
 
 If the compressed data is stored in the program memory, the data can be decompressed with
 
 ```javascript
-const uint8_t *uCompression::pgm_RLEdecompress( const uint8_t *compressedData, uint8_t *uncompressedData, uint16_t chunkSize );
+const uint8_t* uCompression::pgm_RLEdecompress( const uint8_t* compressedData,
+                                                uint8_t*       uncompressedData,
+                                                uint16_t       chunkSize );
 ```
 
 In the common case that the chunk size doesn't exceed 256 bytes, a slightly smaller and faster version can be used:
 
 ```javascript
-const uint8_t *uCompression::pgm_RLEdecompress256( const uint8_t *compressedData, uint8_t *uncompressedData, uint8_t chunkSize );
+const uint8_t* uCompression::pgm_RLEdecompress256( const uint8_t* compressedData,
+                                                   uint8_t*       uncompressedData,
+                                                   uint8_t chunkSize );
 ```
 
 
