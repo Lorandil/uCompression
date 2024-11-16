@@ -17,6 +17,8 @@
 #ifdef USE_ASSEMBLY_RLE_DECOMPRESS
   extern "C" const uint8_t *extern_pgm_RLEdecompress256( const uint8_t *compressedData,
                                                          uint8_t *uncompressedData, uint8_t uncompressedByteCount );
+  extern "C" const uint8_t *extern_pgm_RLEdecompress( const uint8_t *compressedData,
+                                                      uint8_t *uncompressedData, uint16_t uncompressedByteCount );
 #endif
 
 class uCompression

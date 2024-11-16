@@ -284,6 +284,7 @@ const uint8_t *uCompression::RLEdecompress256( const uint8_t *compressedData,
   return( compressedData );
 }
 
+#ifndef USE_ASSEMBLY_RLE_DECOMPRESS
 /*--------------------------------------------------------------*/
 // Decompressor for extended encoding with up to 63 subsequent values
 // Input:  pCompressedData       - pointer to compressed data in PROGMEM
@@ -329,6 +330,15 @@ const uint8_t *uCompression::pgm_RLEdecompress( const uint8_t *compressedData,
 
   return( compressedData );
 }
+#else
+const uint8_t *uCompression::pgm_RLEdecompress( const uint8_t *compressedData,
+                                                uint8_t *uncompressedData,
+                                                uint16_t uncompressedByteCount )
+{
+  return( extern_pgm_RLEdecompress( compressedData, uncompressedData, uncompressedByteCount ) );
+}
+#endif
+
 
 #ifndef USE_ASSEMBLY_RLE_DECOMPRESS
 /*--------------------------------------------------------------*/
