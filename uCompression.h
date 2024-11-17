@@ -26,9 +26,9 @@ class uCompression
 public:
   uCompression() = default;
   static uint16_t RLEcompress( const uint8_t *uncompressedData, uint16_t uncompressedByteCount,
-                               uint8_t *compressedData, uint16_t compressedBufferSize );
+                               uint8_t *compressedData );
   static uint16_t pgm_RLEcompress( const uint8_t *uncompressedData, uint16_t uncompressedByteCount,
-                                   uint8_t *compressedData, uint16_t compressedBufferSize );
+                                   uint8_t *compressedData );
   static const uint8_t *RLEdecompress( const uint8_t *compressedData, 
                                        uint8_t *uncompressedData, uint16_t uncompressedByteCount );
   static const uint8_t *RLEdecompress256( const uint8_t *compressedData, 

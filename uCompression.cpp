@@ -3,8 +3,7 @@
 /*--------------------------------------------------------------*/
 uint16_t uCompression::RLEcompress( const uint8_t *uncompressedData,
                                     uint16_t uncompressedByteCount,
-                                    uint8_t *compressedData,
-                                    uint16_t compressedBufferSize )
+                                    uint8_t *compressedData )
 {
   uint16_t compressedByteCount = 0;
 
@@ -98,8 +97,7 @@ uint16_t uCompression::RLEcompress( const uint8_t *uncompressedData,
 /*--------------------------------------------------------------*/
 uint16_t uCompression::pgm_RLEcompress( const uint8_t *uncompressedData,
                                         uint16_t uncompressedByteCount,
-                                        uint8_t *compressedData,
-                                        uint16_t compressedBufferSize )
+                                        uint8_t *compressedData )
 {
   uint16_t compressedByteCount = 0;
 

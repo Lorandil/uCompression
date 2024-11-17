@@ -1,0 +1,43 @@
+#######################################
+
+# Syntax Coloring Map For uCompression
+
+####################################### 
+
+# Class (KEYWORD1)
+
+#######################################
+
+
+
+uCompression	KEYWORD1
+
+
+
+#######################################
+
+# Methods and Functions (KEYWORD2)
+
+#######################################	
+
+
+RLEcompress	KEYWORD2
+
+pgm_RLEcompress	KEYWORD2
+clearBuffer	KEYWORD2
+RLEdecompress	KEYWORD2
+RLEdecompress256	KEYWORD2
+pgm_RLEdecompress	KEYWORD2
+pgm_RLEdecompress256	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+ 
+
+RLE_UNCOMPRESSED_DATA	LITERAL1
+RLE_COMPRESSED_0xFF_DATA	LITERAL1
+RLE_COMPRESSED_0x00_DATA	LITERAL1
+RLE_COMPRESSED_DATA	LITERAL1
+RLE_COMPRESSION_MASK	LITERAL1
