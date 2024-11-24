@@ -8,6 +8,9 @@
 //
 // The library itself can even be used on an ATTiny25 when selecting an appropriate chunk size!
 //
+// Of course the ASCII example is somehow artificial - the typical use case for RLE encoding are monochrome bitmaps
+// with large areas of constant values, e.g. the typical SSD1306/1309/SH1106/... images.
+// In order to keep this sample project small, I decided to use ASCII text instead.
 
 const uint16_t BUFFER_SIZE = 600;
 
@@ -49,25 +52,49 @@ void loop()
   uint8_t compressedData[BUFFER_SIZE];
 
   // compress the test data
-  Serial.print(F("Compressing data... "));
-  uint16_t compressedSize = uCompression::pgm_RLEcompress( testData,         // pointer to original data
-                                                           uncompressedSize, // original size
-                                                           compressedData ); // pointer to result buffer (compressed data)
+  Serial.println(F("Compressing data... "));
+  uint16_t compressedSize = 0;
+
+  // measure the time for 100 compression iterations to get a decent time measurement
+  constexpr int iterations = 100;
+  auto startTime = millis();
+
+  for ( int n = 0; n < iterations; n++ )
+  {
+    compressedSize = uCompression::pgm_RLEcompress( testData,         // pointer to original data
+                                                    uncompressedSize, // original size
+                                                    compressedData ); // pointer to result buffer (compressed data)
+  }
 
   // print the compressed size
-  Serial.print(F("size of compressed data is ")); Serial.print( compressedSize ); Serial.println(F(" bytes"));
+  Serial.print(F("Size of compressed data is ")); Serial.print( compressedSize ); Serial.print(F(" bytes, compression speed was "));
+  // and the compression rate
+  float compressedBytesPerSecond = float( uncompressedSize ) * float( iterations ) * 1000.0 / float( millis() - startTime );
+  Serial.print( compressedBytesPerSecond / 1024 ); Serial.println(F(" kB/s"));
 
   // allocate buffer for decompressed data (and fill it with '0' to ensure the test data is zero terminated)
   uint8_t uncompressedData[BUFFER_SIZE];
   memset( uncompressedData, 0, sizeof( uncompressedData ) );
-  // uncompress the data 
-  uCompression::RLEdecompress( compressedData,     // pointer to the compressed data
-                               uncompressedData,   // pointer to result buffer (decompressed data)
-                               uncompressedSize ); // original size
 
+  // measure the time for 100 compression iterations to get a decent time measurement
+  startTime = millis();
+
+  for ( int n = 0; n < iterations; n++ )
+  {
+    // uncompress the data 
+    uCompression::RLEdecompress( compressedData,     // pointer to the compressed data
+                                 uncompressedData,   // pointer to result buffer (decompressed data)
+                                 uncompressedSize ); // original size
+  }
+
+  // and the decompression rate
+  float uncompressedBytesPerSecond = float( uncompressedSize ) * float( iterations ) * 1000.0 / float( millis() - startTime );
+  
   // and print the decompressed data for referrence
   Serial.println(F("\nDecompressed data"));
   Serial.print( (const char *) uncompressedData );
+  // print the decompression speed
+  Serial.print(F("Decompression speed was ")); Serial.print( uncompressedBytesPerSecond / 1024 ); Serial.println(F(" kB/s"));
 
   // compare decompressed data to original data
   if ( memcmp_P( uncompressedData, testData, uncompressedSize ) == 0 )
