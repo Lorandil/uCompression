@@ -57,8 +57,8 @@ Here is a small table showing decompression speeds for selected MCUs.
 | MCU              | Clock Speed   | Data Source   | Decompression Speed | Code Used |
 | ---------------- |:-------------:|:-------------:|:-------------------:|:---------:|
 | Arduino Leonardo | 16 MHz        | RAM      	   | 700kB/s .. 1000kB/s | C++       | 
-| Arduino Leonardo | 16 MHz        | PROGMEM       | 1400kB/s .. 2000kB/s| Assembly  |
-| Raspberry Pi pico| 133 MHz       | -             | ~10.000kB/s         | C++       |
+| Arduino Leonardo | 16 MHz        | FLASH(PROGMEM)| 1400kB/s .. 2000kB/s| Assembly  |
+| Raspberry Pi pico| 133 MHz       | RAM/FLASH     | ~10.000kB/s         | C++       |
 
 
 ## Limitiations
