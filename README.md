@@ -48,18 +48,22 @@ const uint8_t* uCompression::pgm_RLEdecompress256( const uint8_t* compressedData
 
 
 ## Performance
- As with most compression algorithms, the decompression rate depends on the original data.
- On a Arduino Leonardo (ATmega32U4@16Mhz) decompression rates between 700kB/s and 1000kB/s have been 
- observed when using the C++ code. For some AVR chips (ATmega328, ATmega32U4, ATTiny85) assembly code
- is automatically used, resulting in roughly the double decompression Speed.
+ As with most compression algorithms, the decompression rate depends on the original data.<br> 
+For some AVR chips (**ATmega328, ATmega32U4, ATTiny85**) assembly code
+ is automatically used, resulting in approximately the double decompression speed.
+ 
+Here is a small table showing decompression speeds for selected MCUs.
+ 
+| MCU              | Clock Speed   | Data Source   | Decompression Speed | Code Used |
+| ---------------- |:-------------:|:-------------:|:-------------------:|:---------:|
+| Arduino Leonardo | 16 MHz        | RAM      	   | 700kB/s .. 1000kB/s | C++       | 
+| Arduino Leonardo | 16 MHz        | PROGMEM       | 1400kB/s .. 2000kB/s| Assembly  |
+| Raspberry Pi pico| 133 MHz       | -             | ~10.000kB/s         | C++       |
+
 
 ## Limitiations
 The first and most important limitation is, that there is **NO error checking**!
 If a target buffer is too small or the chunk sizes for encoding is larger than for decoding, the behaviour is undefined, most likely the MCU will crash or reboot.
 
-RLE algorithms are specialized on efficiently compressing constant data areas. Random data cannot be compressed and will result in the compressed data being slightly larger than the original data.
- Under worst case conditions the resulting size will exceed the original data size (by 1 byte for every
- 63 bytes of source data in a chunk).
-
-## Sample Data
-The sample data was taken from my updated version of TinyInvaders bei Daniel C and my TinyMinez project.
+RLE algorithms are specialized on efficiently compressing constant data areas. Random data cannot be compressed and will result in the compressed data being slightly larger than the original data.<br>
+Under worst case conditions the resulting size will exceed the original data size (by 1 byte for every 63 bytes of source data in a chunk).

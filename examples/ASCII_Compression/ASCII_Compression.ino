@@ -55,6 +55,11 @@ void loop()
   Serial.println(F("Compressing data... "));
   uint16_t compressedSize = 0;
 
+
+  /*----------------------------------------------*/
+  /* Compress the test data                       */
+  /*----------------------------------------------*/
+
   // measure the time for 100 compression iterations to get a decent time measurement
   constexpr int iterations = 100;
   auto startTime = millis();
@@ -76,6 +81,11 @@ void loop()
   uint8_t uncompressedData[BUFFER_SIZE];
   memset( uncompressedData, 0, sizeof( uncompressedData ) );
 
+
+  /*----------------------------------------------*/
+  /* Decompress the compressed data again         */
+  /*----------------------------------------------*/
+
   // measure the time for 100 compression iterations to get a decent time measurement
   startTime = millis();
 
@@ -95,6 +105,11 @@ void loop()
   Serial.print( (const char *) uncompressedData );
   // print the decompression speed
   Serial.print(F("Decompression speed was ")); Serial.print( uncompressedBytesPerSecond / 1024 ); Serial.println(F(" kB/s"));
+
+
+  /*----------------------------------------------*/
+  /* Compare uncompressed data with original data */
+  /*----------------------------------------------*/
 
   // compare decompressed data to original data
   if ( memcmp_P( uncompressedData, testData, uncompressedSize ) == 0 )
