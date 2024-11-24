@@ -52,13 +52,17 @@ const uint8_t* uCompression::pgm_RLEdecompress256( const uint8_t* compressedData
 For some AVR chips (**ATmega328, ATmega32U4, ATTiny85**) assembly code
  is automatically used, resulting in approximately the double decompression speed.
  
-Here is a small table showing decompression speeds for selected MCUs.
+Here is a small table showing decompression speeds for a selection of test files on some MCUs.
  
 | MCU              | Clock Speed   | Data Source   | Decompression Speed | Code Used |
-| ---------------- |:-------------:|:-------------:|:-------------------:|:---------:|
-| Arduino Leonardo | 16 MHz        | RAM      	   | 700kB/s .. 1000kB/s | C++       | 
-| Arduino Leonardo | 16 MHz        | FLASH(PROGMEM)| 1400kB/s .. 2000kB/s| Assembly  |
-| Raspberry Pi pico| 133 MHz       | RAM/FLASH     | ~10.000kB/s         | C++       |
+| ---------------- |:-------------:|:-------------:|:-------------------: |:--------:|
+| Arduino UNO R3   | 16 MHz        | RAM      	   | 0.7M B/s .. 1.0 MB/s | C++      | 
+|                  | 16 MHz        | FLASH(PROGMEM)| 1.4 MB/s .. 2.0 MB/s | Assembly |
+| Arduino Leonardo | 16 MHz        | RAM      	   | 0.7M B/s .. 1.0 MB/s | C++      | 
+|                  | 16 MHz        | FLASH(PROGMEM)| 1.4 MB/s .. 2.0 MB/s | Assembly |
+| Arduino Mega2560 | 16 MHz        | RAM/FLASH 	   | 0.7M B/s .. 1.0 MB/s | C++      | 
+| Arduino UNO R4   | 48 MHz        | RAM/FLASH     | 3.0 MB/s .. 3.8 MB/s | C++      |
+| Raspberry Pi pico| 133 MHz       | RAM/FLASH     | 7.9 MB/s .. 10.2 MB/s| C++      |
 
 
 ## Limitiations
